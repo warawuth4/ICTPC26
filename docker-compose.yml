@@ -1,0 +1,46 @@
+services:
+  # Database
+  mariadb:
+    image: mariadb:10.11
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpw
+      - MYSQL_USER=domjudge
+      - MYSQL_PASSWORD=djpw
+      - MYSQL_DATABASE=domjudge
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    command: --max-connections=1000
+
+  # The Web Interface (Domserver)
+  domserver:
+    image: domjudge/domserver:latest
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    environment:
+      - CONTAINER_TIMEZONE=Asia/Bangkok
+      - MYSQL_HOST=mariadb
+      - MYSQL_USER=domjudge
+      - MYSQL_PASSWORD=djpw
+      - MYSQL_ROOT_PASSWORD=rootpw
+    ports:
+      - "12345:80"
+    depends_on:
+      - mariadb
+
+  # The Judge (Worker)
+  judgehost:
+    image: domjudge/judgehost:latest
+    privileged: true
+    hostname: judgedaemon-0
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    environment:
+      - CONTAINER_TIMEZONE=Asia/Bangkok
+      - DAEMON_ID=0
+      - JUDGEDAEMON_PASSWORD=judgehostnaja # <------------------ JudgeHost Password
+      - DOMSERVER_BASEURL=http://domserver/
+    depends_on:
+      - domserver
+    restart: always
