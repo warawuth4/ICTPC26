@@ -16,3 +16,6 @@ sudo docker compose logs domserver | grep "Initial admin password"
 sudo docker compose ps
 
 hostname -I
+
+# Resolver
+./resolver.sh https://hypochromic-ensuingly-lyn.ngrok-free.dev/api/v4/contests/1 admin administrator --display_name "{team.name} ({org.name})"
