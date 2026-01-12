@@ -18,4 +18,5 @@ sudo docker compose ps
 hostname -I
 
 # Resolver
-./resolver.sh https://hypochromic-ensuingly-lyn.ngrok-free.dev/api/v4/contests/1 admin administrator --display_name "{team.name} ({org.name})"
+./resolver.sh https://hypochromic-ensuingly-lyn.ngrok-free.dev/api/v4/contests/1 admin administrator --display_name "{team.name} ({org.name})" --info
+resolver.bat https://hypochromic-ensuingly-lyn.ngrok-free.dev/api/v4/contests/1 admin padministrator --display_name "{team.name} ({org.name})" --info
