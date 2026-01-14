@@ -17,6 +17,6 @@ sudo docker compose ps
 
 hostname -I
 
-# Resolver
+<a href="https://github.com/warawuth4/ICTPC26/tree/main/Resolver"># Resolver</a>
 ./resolver.sh https://hypochromic-ensuingly-lyn.ngrok-free.dev/api/v4/contests/1 admin administrator --display_name "{team.name} ({org.name})" --info
 resolver.bat https://hypochromic-ensuingly-lyn.ngrok-free.dev/api/v4/contests/1 admin padministrator --display_name "{team.name} ({org.name})" --info
